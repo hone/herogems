@@ -7,7 +7,6 @@ module RSpec
 
       lib = File.expand_path('../../../lib', __FILE__)
 
-      heroku_bin = "#{`bundle show heroku`.chomp}/bin/heroku"
       heroku_home_directory = "-r#{File.expand_path('../heroku_home_directory.rb', __FILE__)}"
 
       env = (options.delete(:env) || {}).map{|k,v| "#{k}='#{v}' "}.join
@@ -15,7 +14,7 @@ module RSpec
         v == true ? " --#{k}" : " --#{k} #{v}" if v
       end.join
 
-      cmd = "#{env}#{Gem.ruby} -I#{lib} #{heroku_home_directory} #{heroku_bin} #{cmd}#{args}"
+      cmd = "#{env}#{Gem.ruby} -I#{lib} #{heroku_home_directory} #{HEROKU_BIN} #{cmd}#{args}"
 
       if exitstatus
         sys_status(cmd)
@@ -43,6 +42,21 @@ module RSpec
       @err = nil
       @out = %x{#{cmd}}.strip
       @exitstatus = $?.exitstatus  
+    end
+
+    def reset!
+      @in_p, @out_p, @err_p = nil, nil, nil
+      tmp = File.expand_path('../../../tmp', __FILE__)
+      # Dir["#{tmp}/gems/*,*}"].each do |dir|
+      #   FileUtils.rm_rf(dir)
+      # end
+      FileUtils.rm_rf(tmp)
+      FileUtils.mkdir_p(tmp)
+
+      ENV['RUBYOPT'] = nil
+      ENV['BUNDLE_GEMFILE'] = nil
+      ENV['GEM_PATH'] = [ENV['GEM_HOME'], tmp].join(':')
+      ENV['GEM_HOME'] = tmp
     end
   end
 end

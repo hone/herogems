@@ -18,4 +18,21 @@ RSpec.configure do |config|
   config.filter_run :focused => true
   config.run_all_when_everything_filtered = true
   config.alias_example_to :fit, :focused => true
+
+  original_path     = ENV['PATH']
+  original_gem_home = ENV['GEM_HOME']
+  original_gem_path = ENV['GEM_PATH']
+
+  # must do before we kill bundler
+  HEROKU_BIN = "#{`bundle show heroku`.chomp}/bin/heroku"
+
+  config.before do
+    reset!
+  end
+
+  config.after do
+    ENV['PATH']     = original_path
+    ENV['GEM_HOME'] = original_gem_home
+    ENV['GEM_PATH'] = original_gem_path
+  end
 end
