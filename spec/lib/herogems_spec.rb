@@ -15,7 +15,7 @@ describe "Herogems" do
 
     context "no enabled plugins but plugins installed" do
       before do
-        system("gem install #{plugin_gem_path('herobro')} --ignore-dependencies --no-ri --no-rdoc > /dev/null")
+        gem_install('herobro')
       end
 
       it "should not load any installed plugins" do
@@ -29,7 +29,7 @@ describe "Herogems" do
 
     context "loads enabled gems" do
       before do
-        system("gem install #{plugin_gem_path('herobro')} --ignore-dependencies --no-ri --no-rdoc > /dev/null")
+        gem_install('herobro')
         File.open(HerogemsLoader::config_file, 'w') {|file| file.write(['herobro'].to_yaml) }
       end
 

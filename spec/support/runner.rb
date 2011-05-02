@@ -60,5 +60,9 @@ module RSpec
       ENV['GEM_PATH'] = [ENV['GEM_HOME'], tmp_gems].join(':')
       ENV['GEM_HOME'] = tmp_gems
     end
+
+    def gem_install(gem_name)
+      system("gem install #{plugin_gem_path(gem_name)} --ignore-dependencies --no-ri --no-rdoc > /dev/null")
+    end
   end
 end
