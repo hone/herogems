@@ -7,5 +7,9 @@ module RSpec
     def tmp_path
       File.expand_path('../../../tmp', __FILE__)
     end
+
+    def herogems_config
+      Herogems::config_file
+    end
   end
 end

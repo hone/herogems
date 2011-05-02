@@ -1,6 +1,6 @@
 module Herogems
 
-  include Heroku::PluginInterface
+  include Heroku::Helpers
   extend self
 
   def exists?
@@ -17,6 +17,7 @@ module Herogems
 
   def load_gems
     error_occurred = false
+    return unless exists?
     config.each do |gem|
       gem_as_path = gem.gsub('-', '/')
       if gem != gem_as_path
