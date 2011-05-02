@@ -1,7 +1,7 @@
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir["#{File.expand_path('../support', __FILE__)}/*.rb"].each {|f| require f}
-require File.expand_path('../../lib/herogems', __FILE__)
+require File.expand_path('../../lib/herogems_loader', __FILE__)
 
 $show_err = true
 

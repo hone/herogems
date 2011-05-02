@@ -1,4 +1,6 @@
-module Herogems
+require 'set'
+
+module HerogemsLoader
 
   include Heroku::Helpers
   extend self
@@ -15,10 +17,15 @@ module Herogems
     YAML.load(File.open(config_file))
   end
 
+  def list
+    @@list ||= Set.new
+  end
+
   def load_gems
     error_occurred = false
     return unless exists?
     config.each do |gem|
+      list.add(gem)
       gem_as_path = gem.gsub('-', '/')
       if gem != gem_as_path
         begin
@@ -27,6 +34,7 @@ module Herogems
           require gem
         rescue LoadError
           puts "Unable to require '#{gem}' (or '#{gem_as_path}'), skipping."
+          list.delete(gem)
           error_occurred = true
         end
       else
@@ -34,6 +42,7 @@ module Herogems
           require gem
         rescue LoadError
           puts "Unable to load '#{gem}', skipping."
+          list.delete(gem)
           error_occurred = true
         end
       end
