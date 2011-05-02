@@ -9,7 +9,7 @@ describe "Herogems" do
 
     xit "should install the gem" do
       # need to ignore for now, need to find a non broken rubygems
-      `gem install #{plugin_gem_path('herobro')} --ignore-dependencies`
+      `gem install #{plugin_gem_path('herobro')} --no-ri --no-rdoc --ignore-dependencies`
       `gem list`.should include("herobro")
     end
   end
