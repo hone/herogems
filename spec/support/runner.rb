@@ -46,17 +46,19 @@ module RSpec
 
     def reset!
       @in_p, @out_p, @err_p = nil, nil, nil
-      tmp = File.expand_path('../../../tmp', __FILE__)
+      tmp_gems = "#{tmp_path}/gems"
       # Dir["#{tmp}/gems/*,*}"].each do |dir|
       #   FileUtils.rm_rf(dir)
       # end
-      FileUtils.rm_rf(tmp)
-      FileUtils.mkdir_p(tmp)
+      FileUtils.rm_rf(tmp_path)
+      FileUtils.mkdir_p(tmp_path)
+      FileUtils.mkdir_p("#{tmp_path}/.heroku/plugins")
+      FileUtils.ln_s(File.expand_path("../../../", __FILE__), "#{tmp_path}/.heroku/plugins/herogems")
 
       ENV['RUBYOPT'] = nil
       ENV['BUNDLE_GEMFILE'] = nil
-      ENV['GEM_PATH'] = [ENV['GEM_HOME'], tmp].join(':')
-      ENV['GEM_HOME'] = tmp
+      ENV['GEM_PATH'] = [ENV['GEM_HOME'], tmp_gems].join(':')
+      ENV['GEM_HOME'] = tmp_gems
     end
   end
 end
