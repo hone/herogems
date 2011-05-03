@@ -3,7 +3,6 @@ module RSpec
     def run(cmd, options = {})
       expect_err  = options.delete(:expect_err)
       exitstatus = options.delete(:exitstatus)
-      options["no-color"] = true unless options.key?("no-color") || cmd.to_s[0..3] == "exec"
 
       lib = File.expand_path('../../../lib', __FILE__)
 
