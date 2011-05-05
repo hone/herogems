@@ -1,6 +1,11 @@
 require 'heroku/command/base'
 
+# manages 'herogems', heroku plugins as gems
 class Herogems < Heroku::Command::Base
+  # herogems
+  #
+  # list installed herogems
+  #
   def index
     if HerogemsLoader.list.empty?
       puts "No herogems installed."
@@ -9,6 +14,10 @@ class Herogems < Heroku::Command::Base
     end
   end
 
+  # herogems:enable gem_name
+  #
+  # enables the herogem to be loaded
+  #
   def enable
     gem_name = args.shift
     if gem_name && HerogemsLoader.load_gem(gem_name)
@@ -20,6 +29,10 @@ class Herogems < Heroku::Command::Base
     end
   end
 
+  # herogems:disable gem_name
+  #
+  # disables the herogem from being loaded
+  #
   def disable
     gem_name = args.shift
     if gem_name && HerogemsLoader.list.include?(gem_name)
