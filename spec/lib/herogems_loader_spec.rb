@@ -30,7 +30,7 @@ describe "Herogems" do
     context "loads enabled gems" do
       before do
         gem_install('herobro')
-        File.open(HerogemsLoader::config_file, 'w') {|file| file.write(['herobro'].to_yaml) }
+        File.open(HerogemsLoader::config_file, 'w') {|file| file.write(Set.new(['herobro']).to_yaml) }
       end
 
       it "should load the enabled gem" do
