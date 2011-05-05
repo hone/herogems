@@ -19,4 +19,16 @@ class Herogems < Heroku::Command::Base
       puts "Requires a gem name: heroku herogems:enable gem"
     end
   end
+
+  def disable
+    gem_name = args.shift
+    if gem_name && HerogemsLoader.list.include?(gem_name)
+      HerogemsLoader.list.delete(gem_name)
+      HerogemsLoader.write_config
+    elsif gem_name
+      puts "'#{gem_name}' is not enabled"
+    else
+      puts "Requires a gem name: heroku herogems:disable gem"
+    end
+  end
 end
