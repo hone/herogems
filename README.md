@@ -6,30 +6,30 @@ I hear you like gems...I'm going to gem your plugins. Allows heroku plugins to b
 
 To install this plugin, we just install it like any other heroku plugin
 
-  heroku plugins:install git://github.com/hone/herogems.git
+    heroku plugins:install git://github.com/hone/herogems.git
 
 ## Usage
 
 To install a "herogem" (a gem that is a heroku plugin)
 
-  gem install herobro
-  heroku herogems:enable herobro
+    gem install herobro
+    heroku herogems:enable herobro
 
 herogems:enable sets the herogem to be loaded
 
 heoregms:disable does not uninstall the gem from your sysetm but just prevents it from being loaded
 
-  heroku herogems:disable herobro
+    heroku herogems:disable herobro
 
 To completely remove a gem from your system, you'll need to uninstall the gem
 
-  gem uninstall herobro
+    gem uninstall herobro
 
 herogems by itself will list all the herogems installed.
 
-  heroku herogems
+    heroku herogems
 
-  herobro
+    herobro
 
 ## License
 
