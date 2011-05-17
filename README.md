@@ -31,6 +31,10 @@ herogems by itself will list all the herogems installed.
 
     herobro
 
+## Documentation
+
+For more information on creating a Heroku plugin-as-gem, see the [Github wiki](https://github.com/hone/herogems/wiki).
+
 ## License
 
 Please see MIT-LICENSE for more details.
