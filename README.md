@@ -17,7 +17,7 @@ To install a "herogem" (a gem that is a heroku plugin)
 
 herogems:enable sets the herogem to be loaded
 
-heoregms:disable does not uninstall the gem from your sysetm but just prevents it from being loaded
+herogems:disable does not uninstall the gem from your system but just prevents it from being loaded
 
     heroku herogems:disable herobro
 
